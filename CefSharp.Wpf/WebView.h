@@ -21,7 +21,8 @@ namespace CefSharp
 {
 namespace Wpf
 {
-    public ref class WebView sealed : public ContentControl, IRenderWebBrowser
+    [TemplatePart(Name="PART_Browser", Type=Image::typeid)]
+    public ref class WebView : public ContentControl, IRenderWebBrowser
     {
     private:
         delegate void ActionHandler();
