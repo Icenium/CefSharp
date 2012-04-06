@@ -16,4 +16,5 @@ bin/
 Debug/
 CefSharp/app.aps
 TestResult.xml
+/Debug/
 debug.log

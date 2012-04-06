@@ -55,6 +55,7 @@ namespace CefSharp.Wpf.Example
         {
             InitializeComponent();
             web_view.RequestResource += new RequestResourceHandler(OnRequestResource);
+            web_view.DevToolsShowing += new ShowDevToolsHandler(web_view_DevToolsShowing);
             var presenter = new ExamplePresenter(web_view, this,
                 invoke => Dispatcher.BeginInvoke(invoke));
 
@@ -90,6 +91,12 @@ namespace CefSharp.Wpf.Example
                 { backButton, BackActivated },
                 { forwardButton, ForwardActivated },
             };
+        }
+
+        void web_view_DevToolsShowing(DevToolsControl devToolsControl)
+        {
+            Grid.SetRow(devToolsControl, 1);
+            viewContainer.Children.Add(devToolsControl);
         }
 
         public void SetTitle(string title)
@@ -134,7 +141,7 @@ namespace CefSharp.Wpf.Example
 
         private void OnShowDevToolsClick(object sender, RoutedEventArgs e)
         {
-            web_view.ShowDevTools();
+             web_view.ShowDevTools();
         }
 
 
@@ -147,10 +154,6 @@ namespace CefSharp.Wpf.Example
                     "<html><body><h1>Success</h1><p>This document is loaded from a System.IO.Stream</p></body></html>"));
                 requestResponse.RespondWith(resourceStream, "text/html");
             }
-        }
-        private void OnMenuHomeClick(object sender, RoutedEventArgs e)
-        {
-            web_view.EvaluateScript("var testVar = 123;");
         }
 
         private void control_Activated(object sender, RoutedEventArgs e)

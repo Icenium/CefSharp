@@ -91,6 +91,7 @@ namespace Wpf
         void AddSourceHook();
 		
     protected:
+        virtual CefRefPtr<RenderClientAdapter> CreateClientAdapter();
         virtual void OnVisualParentChanged(DependencyObject^ oldParent) override;
         virtual Size ArrangeOverride(Size size) override;
         virtual void OnGotFocus(RoutedEventArgs^ e) override;

@@ -47,6 +47,11 @@ namespace Wpf
         this->Unloaded += gcnew RoutedEventHandler(this, &WebView::OnUnloaded);	
     }
 
+    CefRefPtr<RenderClientAdapter> WebView::CreateClientAdapter()
+    {
+		return new RenderClientAdapter(this);
+	}
+
     bool WebView::TryGetCefBrowser(CefRefPtr<CefBrowser>& browser)
     {
         if (_browserCore->IsBrowserInitialized)
@@ -636,7 +641,7 @@ namespace Wpf
     {
         ContentControl::OnApplyTemplate();
 
-        _clientAdapter = new RenderClientAdapter(this);
+		_clientAdapter = CreateClientAdapter().get();
 
         AddSourceHook();
 
