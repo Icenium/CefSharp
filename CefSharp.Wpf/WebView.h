@@ -25,6 +25,7 @@ namespace Wpf
     public ref class WebView : public ContentControl, IRenderWebBrowser
     {
     private:
+		
         delegate void ActionHandler();
         delegate bool MoveFocusHandler(TraversalRequest^ request);
 
@@ -56,8 +57,6 @@ namespace Wpf
         ActionHandler^ _paintPopupDelegate;
         ActionHandler^ _resizePopupDelegate;
 
-        void Initialize(String^ address, BrowserSettings^ settings);
-        bool TryGetCefBrowser(CefRefPtr<CefBrowser>& browser);
         void BrowserCore_PropertyChanged(Object^ sender, PropertyChangedEventArgs^ e);
         void Timer_Tick(Object^ sender, EventArgs^ e);
         void ToolTip_Closed(Object^ sender, RoutedEventArgs^ e);
