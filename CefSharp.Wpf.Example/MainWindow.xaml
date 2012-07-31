@@ -64,6 +64,7 @@
                 </cs:WebViewEx.LayoutTransform>
             </cs:WebViewEx>
             
+			<ContentControl Name="DevToolsContainer" Grid.Row="1" />
         </Grid>
     </DockPanel>
 </Window>

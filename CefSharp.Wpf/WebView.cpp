@@ -141,6 +141,10 @@ namespace Wpf
                 message == WM_SYSCHAR;
             keyInfo.imeChar =
                 message == WM_IME_CHAR;
+			CefKeyInfo info;
+			info.key = wParam.ToInt32();
+			info.sysChar = sysChar;
+			info.imeChar = imeChar;
 
             browser->SendKeyEvent(type, keyInfo, lParam.ToInt32());
             handled = true;
