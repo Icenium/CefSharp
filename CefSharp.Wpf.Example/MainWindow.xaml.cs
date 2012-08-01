@@ -18,6 +18,12 @@ namespace CefSharp.Wpf.Example
     {
 
         private const string resource_url = "http://test/resource/load";
+
+        public void OnReload(object sender, RoutedEventArgs e)
+		{
+			this.window = new NewWindow();
+			window.Show();
+		}
         // file
         public event EventHandler ShowDevToolsActivated;
         public event EventHandler CloseDevToolsActivated;
@@ -211,5 +217,6 @@ namespace CefSharp.Wpf.Example
                 handler(this, urlTextBox.Text);
             }
         }
+
     }
 }

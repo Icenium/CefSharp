@@ -53,6 +53,18 @@ namespace Wpf
 		return new RenderClientAdapter(this);
 	}
 
+	void WebView::CreateBrowser()
+    {
+        HwndSource^ source = (HwndSource^)PresentationSource::FromVisual(this);
+		HWND hwnd = static_cast<HWND>(source->Handle.ToPointer());
+
+        CefWindowInfo window;
+        window.SetAsOffScreen(hwnd);
+        CefString url = toNative(_browserCore->Address);
+
+        CefBrowser::CreateBrowser(window, _clientAdapter.get(),
+            url, *_settings->_browserSettings);
+	}
     bool WebView::TryGetCefBrowser(CefRefPtr<CefBrowser>& browser)
     {
         if (_browserCore->IsBrowserInitialized)
