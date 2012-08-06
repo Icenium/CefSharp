@@ -105,7 +105,6 @@ namespace Wpf
         virtual void OnMouseUp(MouseButtonEventArgs^ e) override;
         virtual void OnMouseLeave(MouseEventArgs^ e) override;
         virtual void Initialize(String^ address, BrowserSettings^ settings);
-		virtual CefRefPtr<RenderClientAdapter> CreateClientAdapter();
 		virtual void CreateBrowser();
 
     public:
