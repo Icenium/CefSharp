@@ -2,6 +2,7 @@
 
 #include <msclr/lock.h>
 #include "WebView.h"
+using namespace System::Threading;
 
 namespace CefSharp
 {
