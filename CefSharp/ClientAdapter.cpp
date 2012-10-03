@@ -199,18 +199,18 @@ namespace CefSharp
 
             resourceStream = CefStreamReader::CreateForHandler(static_cast<CefRefPtr<CefReadHandler>>(adapter));
             response->SetMimeType(toNative(requestResponse->MimeType));
-            response->SetStatus(requestResponse->StatusCode);
-            response->SetStatusText(toNative(requestResponse->StatusText));
+			response->SetStatus(requestResponse->StatusCode);
+			response->SetStatusText(toNative(requestResponse->StatusText));
 
-            CefResponse::HeaderMap map;
-            if(requestResponse->ResponseHeaders != nullptr)
-            {
-                for each(KeyValuePair<String^, String^>^ kvp in requestResponse->ResponseHeaders)
-                {
-                    map.insert(pair<CefString,CefString>(toNative(kvp->Key),toNative(kvp->Value)));
-                }
-            }
-            response->SetHeaderMap(map);
+			CefResponse::HeaderMap map;
+			if(requestResponse->ResponseHeaders != nullptr)
+			{
+				for each(KeyValuePair<String^, String^>^ kvp in requestResponse->ResponseHeaders)
+				{
+					map.insert(pair<CefString,CefString>(toNative(kvp->Key),toNative(kvp->Value)));
+				}
+			}
+			response->SetHeaderMap(map);
         }
 
         return ret;
