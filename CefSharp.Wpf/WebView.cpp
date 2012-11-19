@@ -880,6 +880,34 @@ namespace Wpf
     { 
         HidePopup();
     }
+	
+    void WebView::OnLoaded(Object^ sender, RoutedEventArgs^ e)
+    {  
+		EnsureSourceAndHook();
+    }
+	
+	
+    void WebView::EnsureSourceAndHook()
+    {
+		if (_source == nullptr)
+        {
+			_source = (HwndSource^)PresentationSource::FromVisual(this);
+			_matrix = _source->CompositionTarget->TransformToDevice;
+
+			_hook = gcnew Interop::HwndSourceHook(this, &WebView::SourceHook);
+			_source->AddHook(_hook);
+		}
+    }
+
+    void WebView::OnUnloaded(Object^ sender, RoutedEventArgs^ e)
+    {  
+		if (_source && _hook)
+        {
+            _source->RemoveHook(_hook);
+			_source = nullptr;
+			_hook = nullptr;
+        }
+    }
 
     void WebView::HidePopup()
     {
