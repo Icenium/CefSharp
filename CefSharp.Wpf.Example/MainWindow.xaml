@@ -34,10 +34,6 @@
                 <MenuItem Header="Test Load String" Name="testLoadStringMenuItem" Click="control_Activated" />
                 <MenuItem Header="Test Cookie Visitor" Name="testCookieVisitorMenuItem" Click="control_Activated" />
             </MenuItem>
-            <MenuItem Header="Bookmarks">
-                <MenuItem Header="CefSharp Home" Name="homeMenuItem" />
-                <MenuItem Header="FireBug Lite" Name="fireBugMenuItem" Click="OnShowDevToolsClick"/>
-            </MenuItem>
         </Menu>
         <DockPanel VerticalAlignment="Top" DockPanel.Dock="Top">
             <Button Height="23" Name="backButton" Width="75" IsEnabled="False" Click="control_Activated">Back</Button>

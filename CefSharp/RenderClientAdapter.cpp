@@ -38,25 +38,4 @@ namespace CefSharp
     {
         _renderBrowserControl->SetCursor(cursor);
     }
-
-	bool RenderClientAdapter::GetScreenRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
-    {
-		Console::WriteLine("GetScreenRect");
-		return false;
-    }
-	bool RenderClientAdapter::GetScreenPoint(CefRefPtr<CefBrowser> browser,
-                              int viewX,
-                              int viewY,
-                              int& screenX,
-                              int& screenY)
-    {
-		Console::WriteLine("GetScreenPoint");
-		return false;
-    }
-	bool RenderClientAdapter::GetViewRect(CefRefPtr<CefBrowser> browser,
-                           CefRect& rect)
-    {
-		Console::WriteLine("GetViewRect");
-		return false;
-    }
 }

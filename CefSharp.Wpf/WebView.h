@@ -21,7 +21,6 @@ namespace CefSharp
 {
 namespace Wpf
 {
-    [TemplatePart(Name="PART_Browser", Type=Image::typeid)]
     public ref class WebView : public ContentControl, IRenderWebBrowser
     {
     private:
@@ -84,9 +83,7 @@ namespace Wpf
         void OnPopupMouseDown(Object^ sender,MouseButtonEventArgs^ e);
         void OnPopupMouseUp(Object^ sender, MouseButtonEventArgs^ e);
         void OnPopupMouseLeave(Object^ sender, MouseEventArgs^ e);
-        void OnWindowLocationChanged(Object^ sender, EventArgs^ e) ;
         void OnHidePopup(Object^ sender, EventArgs^ e);
-        void EnsureSourceAndHook();
 
         void HidePopup();
         void AddSourceHook();

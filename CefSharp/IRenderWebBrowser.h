@@ -15,7 +15,5 @@ namespace CefSharp
         void SetPopupIsOpen(bool isOpen);
 
 		void SetPopupSizeAndPosition(const CefRect& rect);
-
-		void GetScreenPoint(int relativeX, int relativeY, int& screenX, int& screenY);
     };
 }

@@ -35,9 +35,9 @@ namespace CefSharp
 			RequestResource(browserControl, requestResponse);
 		}
 
-		void WebViewEx::OnFrameLoadEnd()
+		void WebViewEx::OnFrameLoadEnd(String^ url)
 		{
-			WebView::OnFrameLoadEnd();
+			WebView::OnFrameLoadEnd(url);
 			Dispatcher->Invoke(gcnew ActionHandler(this, &WebViewEx::OnLoadCompleted)); 
 		}
 
@@ -94,18 +94,21 @@ namespace CefSharp
 			showingDevTools = true;
 			WebView::ShowDevTools();
 		}
-		bool WebViewEx::GetAuthCredentials(IWebBrowser^ browser, Uri^ serverAddress, bool isProxy, String^ realm, String^% username, String^% password)
+
+		bool WebViewEx::GetAuthCredentials(IWebBrowser^ browser, bool isProxy, String^ host ,int port, String^ realm, String^ scheme, String^% username, String^% password)
 		{
-			return OnRequestAuthCredentials(browser, serverAddress, isProxy, realm, username, password);
+			return OnRequestAuthCredentials(browser, host, isProxy, realm, username, password);
 		}
-		bool WebViewEx::OnRequestAuthCredentials(IWebBrowser^ browserControl, Uri^ serverAddress, bool isProxy, String^ realm, String^% username, String^% password)
+
+		bool WebViewEx::OnRequestAuthCredentials(IWebBrowser^ browserControl, String^ host, bool isProxy, String^ realm, String^% username, String^% password)
 		{
-			auto args = gcnew RequestAuthCredentialsEventArgs(serverAddress, isProxy, realm);
+			auto args = gcnew RequestAuthCredentialsEventArgs(host, isProxy, realm);
 			RequestAuthCredentials(browserControl, args);
 			username = args->Username;
 			password = args->Password;
 			return args->IsSuccessful;
 		}
 
+		
 	}
 }

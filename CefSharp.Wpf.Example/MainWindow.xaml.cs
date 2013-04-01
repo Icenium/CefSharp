@@ -16,6 +16,7 @@ namespace CefSharp.Wpf.Example
 {
     public partial class MainWindow : Window, IExampleView
     {
+		private NewWindow window;
 
         private const string resource_url = "http://test/resource/load";
 
@@ -62,8 +63,6 @@ namespace CefSharp.Wpf.Example
         {
             InitializeComponent();
             web_view.RequestResource += new RequestResourceHandler(OnRequestResource);
-            web_view.DevToolsShowing += new DevToolsShowingHandler(web_view_DevToolsShowing);
-            web_view.DevToolsShowed += new DevToolsShowedHandler(web_view_DevToolsShowed);
             var presenter = new ExamplePresenter(web_view, this,
                 invoke => Dispatcher.BeginInvoke(invoke));
 
@@ -101,46 +100,6 @@ namespace CefSharp.Wpf.Example
             };
 
            //CEF.RegisterScheme("chrome-devtools", "devtools", false, new DelegateSchemeHandlerFactory(OnTestRequest));
-        }
-
-
-        void web_view_DevToolsShowing(object sender, DevToolsShowingEventArgs args)
-        {
-            debugWindow = new Window();
-            debugWindow.Title = "Custom Debug";
-            debugWindow.Closed += debugWindow_Closed;
-            args.SetParentWindow(debugWindow);
-            debugWindow.Show();
-
-            //args.SetParentWindow(Application.Current.MainWindow);
-        }
-        private void OnShowDevToolsClick(object sender, RoutedEventArgs e)
-        {
-            if (debugWindow == null)
-            {
-                web_view.ShowDevTools();
-            }
-            else
-            {
-                debugWindow.Focus();
-            }
-        }
-
-
-        void debugWindow_Closed(object sender, EventArgs e)
-        {
-            debugWindow.Closed -= debugWindow_Closed;
-            web_view.CloseDevTools();
-            debugWindow = null;
-        }
-
-        Window debugWindow = null;
-        void web_view_DevToolsShowed(DevToolsControl devToolsControl)
-        {
-
-            debugWindow.Content = devToolsControl;
-            //Grid.SetRow(devToolsControl, 1);
-            //viewContainer.Children.Add(devToolsControl);
         }
 
         public void SetTitle(string title)

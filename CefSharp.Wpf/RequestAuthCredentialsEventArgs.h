@@ -7,14 +7,14 @@ namespace CefSharp
 		{
 		private:
 			bool isProxy;
-			Uri^ serverAddress;
+			String^ host;
 			String^ realm;
 			String^ username;
 			String^ password;
 			bool isSuccessful;
 		public:
-			RequestAuthCredentialsEventArgs(Uri^ serverAddress, bool isProxy, String^ realm){
-				this->serverAddress = serverAddress;
+			RequestAuthCredentialsEventArgs(String^ host, bool isProxy, String^ realm){
+				this->host = host;
 				this->isProxy = isProxy;
 				this->realm = realm;
 			}
@@ -23,9 +23,9 @@ namespace CefSharp
 			{
 				bool get() { return isProxy; }
 			}
-			virtual property Uri^ ServerAddess
+			virtual property String^ Host
 			{
-				Uri^ get() { return serverAddress; }
+				String^ get() { return host; }
 			}
 			virtual property String^ Realm
 			{

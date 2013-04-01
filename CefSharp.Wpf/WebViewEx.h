@@ -52,13 +52,14 @@ namespace CefSharp
 			virtual  bool OnBeforeBrowse(IWebBrowser^ browser, IRequest^ request, NavigationType naigationvType, bool isRedirect){return false;};
 			virtual bool OnBeforeResourceLoad(IWebBrowser^ browser, IRequestResponse^ requestResponse);
 			virtual void OnResourceResponse(IWebBrowser^ browser, String^ url, int status, String^ statusText, String^ mimeType, WebHeaderCollection^ headers){};
-			virtual bool GetAuthCredentials(IWebBrowser^ browser, Uri^ serverAddress, bool isProxy, String^ realm, String^% username, String^% password);
-		    
+			virtual bool GetAuthCredentials(IWebBrowser^ browser, bool isProxy, String^ host ,int port, String^ realm, String^ scheme, String^% username, String^% password);
+		    virtual bool GetDownloadHandler(IWebBrowser^ browser, String^ mimeType, String^ fileName, Int64 contentLength, IDownloadHandler ^% handler){return false;};
+
 			virtual void OnRequestResource(IWebBrowser^ browserControl, IRequestResponse^ requestResponse);
-			virtual bool OnRequestAuthCredentials(IWebBrowser^ browserControl, Uri^ serverAddress, bool isProxy, String^ realm, String^% username, String^% password);
+			virtual bool OnRequestAuthCredentials(IWebBrowser^ browserControl, String^ host, bool isProxy, String^ realm, String^% username, String^% password);
 			virtual void OnLoadCompleted();
 			virtual void OnShowDevTools(DevToolsWebView^ view);
-			virtual void OnFrameLoadEnd() override;
+			virtual void OnFrameLoadEnd(String^ url) override;
 			virtual void ShowDevTools() override;
 
 		};
