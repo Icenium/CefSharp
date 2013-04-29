@@ -157,5 +157,8 @@
     <ClInclude Include="LoadCompletedEventArgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IJsDialogHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

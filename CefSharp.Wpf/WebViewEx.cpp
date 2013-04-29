@@ -12,7 +12,7 @@ namespace CefSharp
 			WebView::Initialize(address, settings);
 			
 			WebView::RequestHandler = this;
-			
+			WebView::JsDialogHandler = this;
 		}
 		
 		CefRefPtr<RenderClientAdapter> WebViewEx::CreateClientAdapter()
@@ -109,6 +109,16 @@ namespace CefSharp
 			return args->IsSuccessful;
 		}
 
-		
+		bool WebViewEx::OnJSPrompt(IWebBrowser^ browser, String^ url, String^ message, String^ defaultValue, bool& retval,  String^% result)
+		{
+			auto args = gcnew JSPromptEventArgs(message, defaultValue);
+
+			JSPromptHandler(args);
+
+			retval = args->ReturnValue;
+			result = args->Result;
+
+			return args->Handled;
+		}
 	}
 }
