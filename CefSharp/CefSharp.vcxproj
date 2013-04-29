@@ -144,6 +144,7 @@
     <ClInclude Include="DownloAdadapter.h" />
     <ClInclude Include="ICookieVisitor.h" />
     <ClInclude Include="IDownloadHandler.h" />
+    <ClInclude Include="IJsDialogHandler.h" />
     <ClInclude Include="IKeyboardHandler.h" />
     <ClInclude Include="ILifespanHandler.h" />
     <ClInclude Include="ILoadHandler.h" />
