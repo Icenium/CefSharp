@@ -3,6 +3,7 @@
 #include "WebView.h"
 #include "RequestAuthCredentialsEventArgs.h"
 #include "JSPromptEventArgs.h"
+#include "LoadStartedEventArgs.h"
 using namespace System;
 using namespace System::Net;
 namespace CefSharp
@@ -35,7 +36,7 @@ namespace CefSharp
 			virtual event RequestAuthCredentialsHandler^ RequestAuthCredentials;
 			virtual event RequestResourceHandler^ RequestResource;
 			virtual event DevToolsShownHandler^ DevToolsShown;
-			virtual event EventHandler^ LoadCompleted;
+			virtual event LoadStartedEventHandler^ LoadStarted;
 			virtual event JSPromptHandler^ JSPromptHandler;
 
 			WebViewEx() 
@@ -60,9 +61,8 @@ namespace CefSharp
 
 			virtual void OnRequestResource(IWebBrowser^ browserControl, IRequestResponse^ requestResponse);
 			virtual bool OnRequestAuthCredentials(IWebBrowser^ browserControl, String^ host, bool isProxy, String^ realm, String^% username, String^% password);
-			virtual void OnLoadCompleted();
 			virtual void OnShowDevTools(DevToolsWebView^ view);
-			virtual void OnFrameLoadEnd(String^ url) override;
+			virtual void OnFrameLoadStart(String^ url) override;
 			virtual void ShowDevTools() override;
 
 			virtual bool OnJSAlert(IWebBrowser^ browser, String^ url, String^ message) { return false; };

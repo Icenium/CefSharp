@@ -35,10 +35,12 @@ namespace CefSharp
 			RequestResource(browserControl, requestResponse);
 		}
 
-		void WebViewEx::OnFrameLoadEnd(String^ url)
+		void WebViewEx::OnFrameLoadStart(String^ url)
 		{
-			WebView::OnFrameLoadEnd(url);
-			Dispatcher->Invoke(gcnew ActionHandler(this, &WebViewEx::OnLoadCompleted)); 
+			WebView::OnFrameLoadStart(url);
+
+			LoadStartedEventArgs^ args = gcnew LoadStartedEventArgs(url);
+			LoadStarted(this, args);
 		}
 
 		IntPtr WebViewEx::GetMainWindowHandle()
@@ -82,11 +84,6 @@ namespace CefSharp
 		{
 			showingDevTools = false;
 			DevToolsShown(view);
-		}
-
-		void WebViewEx::OnLoadCompleted()
-		{
-			LoadCompleted(this, EventArgs::Empty);
 		}
 
 		void WebViewEx::ShowDevTools()
