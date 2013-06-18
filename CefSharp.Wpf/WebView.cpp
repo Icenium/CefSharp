@@ -244,25 +244,6 @@ namespace Wpf
             type, mouseUp, e->ClickCount);
     }
 
-    void WebView::OnVisualParentChanged(DependencyObject^ oldParent)
-    {
-        EventHandler^ _handler = gcnew EventHandler(this, &WebView::OnHidePopup);
-        Window^ window;
-
-        if (oldParent != nullptr)
-        {
-            window = Window::GetWindow(oldParent);
-            if (window != nullptr)
-            {
-                window->LocationChanged -= _handler;
-                window->Deactivated -= _handler;
-            }
-        }
-
-
-        ContentControl::OnVisualParentChanged(oldParent);
-    }
-
     Size WebView::ArrangeOverride(Size size)
     {
         CefRefPtr<CefBrowser> browser;
@@ -833,16 +814,24 @@ namespace Wpf
         EventHandler^ _handler = gcnew EventHandler(this, &WebView::OnHidePopup);
         Window^ window;
 
-        window = Window::GetWindow(this);
-        if (window != nullptr)
+        parentWindow = Window::GetWindow(this);
+        if (parentWindow != nullptr)
         {
-            window->LocationChanged += _handler;
-            window->Deactivated += _handler;
+            parentWindow->LocationChanged += _handler;
+            parentWindow->Deactivated += _handler;
         }
     }
 
     void WebView::OnUnloaded(Object^ sender, RoutedEventArgs^ e)
     {  
+        EventHandler^ _handler = gcnew EventHandler(this, &WebView::OnHidePopup);
+
+        if (parentWindow != nullptr)
+        {
+            parentWindow->LocationChanged -= _handler;
+            parentWindow->Deactivated -= _handler;
+        }
+
         if (_source && _hook)
         {
             _source->RemoveHook(_hook);

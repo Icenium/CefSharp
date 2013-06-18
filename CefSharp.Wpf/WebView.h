@@ -34,6 +34,7 @@ namespace Wpf
         BrowserCore^ _browserCore;
         MCefRefPtr<ScriptCore> _scriptCore;
 		
+        Window^ parentWindow;
         Object^ _sync;
         HwndSource^ _source;
         Matrix^ _matrix;
@@ -91,7 +92,6 @@ namespace Wpf
     protected:
         bool TryGetCefBrowser(CefRefPtr<CefBrowser>& browser);
         virtual CefRefPtr<RenderClientAdapter> CreateClientAdapter();
-        virtual void OnVisualParentChanged(DependencyObject^ oldParent) override;
         virtual Size ArrangeOverride(Size size) override;
         virtual void OnGotFocus(RoutedEventArgs^ e) override;
         virtual void OnLostFocus(RoutedEventArgs^ e) override;
