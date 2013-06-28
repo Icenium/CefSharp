@@ -117,5 +117,19 @@ namespace CefSharp
 
 			return args->Handled;
 		}
+
+		bool WebViewEx::TryEvaluateScript(String^ script, TimeSpan timeout, Object^% result)
+		{
+			try
+			{
+				result = EvaluateScript(script, timeout);
+
+				return true;
+			}
+			catch (Exception^ ex)
+			{
+				return false;
+			}
+		}
 	}
 }

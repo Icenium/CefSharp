@@ -50,9 +50,7 @@ namespace CefSharp
 
 			virtual bool PopupShowing(CefRefPtr<CefBrowser> parentBrowser, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, const CefString& url, CefRefPtr<CefClient>& client, CefBrowserSettings& settings);
 			virtual void PopupShown(CefRefPtr<CefBrowser> browser) {};
-		
-			
-			
+
 			virtual  bool OnBeforeBrowse(IWebBrowser^ browser, IRequest^ request, NavigationType naigationvType, bool isRedirect){return false;};
 			virtual bool OnBeforeResourceLoad(IWebBrowser^ browser, IRequestResponse^ requestResponse);
 			virtual void OnResourceResponse(IWebBrowser^ browser, String^ url, int status, String^ statusText, String^ mimeType, WebHeaderCollection^ headers){};
@@ -68,6 +66,8 @@ namespace CefSharp
 			virtual bool OnJSAlert(IWebBrowser^ browser, String^ url, String^ message) { return false; };
 			virtual bool OnJSConfirm(IWebBrowser^ browser, String^ url, String^ message, bool& retval) { return false; };
 			virtual bool OnJSPrompt(IWebBrowser^ browser, String^ url, String^ message, String^ defaultValue, bool& retval,  String^% result);
+
+			bool TryEvaluateScript(String^ script, TimeSpan timeout, Object^% result);
 		};
 
 	}
