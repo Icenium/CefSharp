@@ -131,5 +131,31 @@ namespace CefSharp
 				return false;
 			}
 		}
-	}
+
+        void WebViewEx::SimulateButtonClick(Point point, MouseButton mouseButton)
+        {
+            CefRefPtr<CefBrowser> browser;
+            if (TryGetCefBrowser(browser))
+            {
+                CefBrowser::MouseButtonType type;
+                if (mouseButton == MouseButton::Left)
+                {
+                    type = CefBrowser::MouseButtonType::MBT_LEFT;
+                }
+                else if (mouseButton == MouseButton::Middle)
+                {
+                    type = CefBrowser::MouseButtonType::MBT_MIDDLE;
+                }
+                else
+                {
+                    type = CefBrowser::MouseButtonType::MBT_RIGHT;
+                }
+
+                browser->SendMouseMoveEvent(point.X + Math::E, point.Y + Math::E, false);
+                browser->SendMouseMoveEvent(point.X, point.Y, false);
+                browser->SendMouseClickEvent(point.X, point.Y, CefBrowser::MouseButtonType::MBT_LEFT, false, 1);
+                browser->SendMouseClickEvent(point.X, point.Y, CefBrowser::MouseButtonType::MBT_LEFT, true, 1);
+            }
+        }
+    }
 }

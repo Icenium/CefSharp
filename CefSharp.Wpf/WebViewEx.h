@@ -68,6 +68,7 @@ namespace CefSharp
 			virtual bool OnJSPrompt(IWebBrowser^ browser, String^ url, String^ message, String^ defaultValue, bool& retval,  String^% result);
 
 			bool TryEvaluateScript(String^ script, TimeSpan timeout, Object^% result);
+			void SimulateButtonClick(Point point, MouseButton mouseButton);
 		};
 
 	}
