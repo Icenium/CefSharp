@@ -106,11 +106,31 @@ namespace CefSharp
 			return args->IsSuccessful;
 		}
 
-		bool WebViewEx::OnJSPrompt(IWebBrowser^ browser, String^ url, String^ message, String^ defaultValue, bool& retval,  String^% result)
+		bool WebViewEx::OnJSAlert(IWebBrowser^ browser, String^ url, String^ message)
 		{
-			auto args = gcnew JSPromptEventArgs(message, defaultValue);
+			auto args = gcnew JSDialogEventArgs(message, String::Empty);
 
-			JSPromptHandler(args);
+			JSAlert(args);
+
+			return args->Handled;
+		}
+
+		bool WebViewEx::OnJSConfirm(IWebBrowser^ browser, String^ url, String^ message, bool& retval) 
+		{
+			auto args = gcnew JSDialogEventArgs(message, String::Empty);
+
+			JSConfirm(args);
+
+			retval = args->ReturnValue;
+
+			return args->Handled;
+		}
+
+		bool WebViewEx::OnJSPrompt(IWebBrowser^ browser, String^ url, String^ message, String^ defaultValue, bool& retval, String^% result)
+		{
+			auto args = gcnew JSDialogEventArgs(message, defaultValue);
+
+			JSPrompt(args);
 
 			retval = args->ReturnValue;
 			result = args->Result;

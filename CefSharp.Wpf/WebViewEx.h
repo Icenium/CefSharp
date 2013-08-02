@@ -2,7 +2,7 @@
 
 #include "WebView.h"
 #include "RequestAuthCredentialsEventArgs.h"
-#include "JSPromptEventArgs.h"
+#include "JSDialogEventArgs.h"
 #include "LoadStartedEventArgs.h"
 using namespace System;
 using namespace System::Net;
@@ -15,7 +15,7 @@ namespace CefSharp
 		public delegate void RequestResourceHandler(IWebBrowser^ browserControl, IRequestResponse^ requestResponse);
 
 		public delegate void DevToolsShownHandler(DevToolsWebView^ view);
-		public delegate void JSPromptHandler(JSPromptEventArgs^ args);
+		public delegate void JSDialogHandler(JSDialogEventArgs^ args);
 
 		public ref class WebViewEx : public WebView, IRequestHandler, IJsDialogHandler
 		{
@@ -37,7 +37,9 @@ namespace CefSharp
 			virtual event RequestResourceHandler^ RequestResource;
 			virtual event DevToolsShownHandler^ DevToolsShown;
 			virtual event LoadStartedEventHandler^ LoadStarted;
-			virtual event JSPromptHandler^ JSPromptHandler;
+			virtual event JSDialogHandler^ JSAlert;
+			virtual event JSDialogHandler^ JSConfirm;
+			virtual event JSDialogHandler^ JSPrompt;
 
 			WebViewEx() 
 			{
@@ -63,8 +65,8 @@ namespace CefSharp
 			virtual void OnFrameLoadStart(String^ url) override;
 			virtual void ShowDevTools() override;
 
-			virtual bool OnJSAlert(IWebBrowser^ browser, String^ url, String^ message) { return false; };
-			virtual bool OnJSConfirm(IWebBrowser^ browser, String^ url, String^ message, bool& retval) { return false; };
+			virtual bool OnJSAlert(IWebBrowser^ browser, String^ url, String^ message);
+			virtual bool OnJSConfirm(IWebBrowser^ browser, String^ url, String^ message, bool& retval);
 			virtual bool OnJSPrompt(IWebBrowser^ browser, String^ url, String^ message, String^ defaultValue, bool& retval,  String^% result);
 
 			bool TryEvaluateScript(String^ script, TimeSpan timeout, Object^% result);

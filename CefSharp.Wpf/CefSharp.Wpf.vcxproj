@@ -131,7 +131,7 @@
     <ClInclude Include="DelegateSchemeHandlerFactory.h" />
     <ClInclude Include="DevToolsRenderClientAdapter.h" />
     <ClInclude Include="DevToolsWebView.h" />
-    <ClInclude Include="JSPromptEventArgs.h" />
+    <ClInclude Include="JSDialogEventArgs.h" />
     <ClInclude Include="LoadStartedEventArgs.h" />
     <ClInclude Include="RenderClientAdapterEx.h" />
     <ClInclude Include="RequestAuthCredentialsEventArgs.h" />

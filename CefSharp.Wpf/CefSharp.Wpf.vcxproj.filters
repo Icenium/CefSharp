@@ -58,10 +58,10 @@
     <ClInclude Include="RequestAuthCredentialsEventArgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JSPromptEventArgs.h">
+    <ClInclude Include="LoadStartedEventArgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoadStartedEventArgs.h">
+    <ClInclude Include="JSDialogEventArgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

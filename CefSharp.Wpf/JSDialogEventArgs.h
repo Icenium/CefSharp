@@ -5,7 +5,7 @@ namespace CefSharp
   namespace Wpf
   {
 
-	  public ref class JSPromptEventArgs : public EventArgs
+	  public ref class JSDialogEventArgs : public EventArgs
 	  {
 	  private:
 		  String^ message;
@@ -15,7 +15,7 @@ namespace CefSharp
 		  bool handled;
 
 	  public:
-		  JSPromptEventArgs(String^ message, String^ defaultValue){
+		  JSDialogEventArgs(String^ message, String^ defaultValue){
 			this->message = message;
 			this->defaultValue = defaultValue;
 		  }
