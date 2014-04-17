@@ -19,6 +19,7 @@ namespace CefSharp
         /// respond with data from Stream
         void RespondWith(Stream^ stream, String^ mimeType);
         void RespondWith(Stream^ stream, String^ mimeType, String^ statusText, int statusCode);
+        void RespondWith(Stream^ stream, String^ mimeType, String^ statusText, int statusCode, IDictionary<String^, String^>^ _responseHeaders);
     };
 
     enum class ResponseAction
